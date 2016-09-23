@@ -19,12 +19,14 @@
     
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src=./js/drawMap.js></script>
-    
+    <script src=./js/selfGps.js></script>
     <script src=./js/debug.js></script>
     
     <script>
         var globalStrAry; // 画面表示するあらゆる文字列を格納するJSONオブジェクト。
                           // 多言語化対応に備えてグローバル変数化する。
+                          
+        var gpsAry = {}; // サーバーから取得したGPS情報を格納する多次元配列。
         
         var e; // 汎用ERRORオブジェクト。
         var debugMode = true; // trueでDEBUGモード有効、falseで無効。
@@ -35,8 +37,8 @@
             }
             document.getElementById("buttonImmediateUpdateGps").innerHTML=globalStrAry.button.immediateUpdateGps;
             switchGps();
-            var gpsAry = getDummyGPS();
-            var gpsAry = drawMap(gpsAry);
+            gpsAry = getDummyGPS();
+            gpsAry = drawMap(gpsAry);
         }
 
         document.addEventListener('deviceready', function() {

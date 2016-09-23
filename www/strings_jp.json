@@ -1,10 +1,11 @@
 {
     "log" : {
-        "s0001" : "localstrage save success",
-        "s0002" : "localstrage read success",
-        "s9001" : "localstrage save error",
-        "s9002" : "localstrage read error",
-        "s9003" : "error on GPS gathering"
+        "s0001" : "localstorage save success",
+        "s0002" : "localstorage read success",
+        "s9001" : "localstorage save error",
+        "s9002" : "localstorage read error",
+        "s9003" : "error on GPS gathering",
+        "s9004" : "error on selfGpsAry load from localstorage"
     },
     "button" : {
         "switchGps" : [
