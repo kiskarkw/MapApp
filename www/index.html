@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src=./js/loadStringJson.js></script>
+    <script src=./js/writeLog.js></script>
+    <script src=./js/switchGps.js></script>
+    <script src=./js/localStorage.js></script>
+    
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src=./js/drawMap.js></script>
+    
+    <script src=./js/debug.js></script>
+    
+    <script>
+        var globalStrAry; // 画面表示するあらゆる文字列を格納するJSONオブジェクト。
+                          // 多言語化対応に備えてグローバル変数化する。
+        
+        var e; // 汎用ERRORオブジェクト。
+        var debugMode = true; // trueでDEBUGモード有効、falseで無効。
+        
+        function startupApp(){
+            if (debugMode) {
+                var debugWindow = document.getElementById("debugWindow");
+            }
+            document.getElementById("buttonImmediateUpdateGps").innerHTML=globalStrAry.button.immediateUpdateGps;
+            switchGps();
+            var gpsAry = getDummyGPS();
+            var gpsAry = drawMap(gpsAry);
+        }
+
+        document.addEventListener('deviceready', function() {
+            loadStringJson('strings_jp.json');
+            timerID = setInterval(function(){
+                if ("EOF" in globalStrAry){
+                    writeLog("strings loading finished", e);
+                    clearInterval(timerID);
+                    timerID = null;
+                    startupApp();
+                } else {
+                    writeLog("strings loading is looping . waitng for EOF", e);
+                }
+            }, 1000);
+        }, false);
+        
+    </script>
+
+</head>
+<body>
+    <ons-tabbar var="mainTab">
+        <ons-tab label="ホーム" page="html/home.html" active></ons-tab>
+        <!--
+        <ons-tab label="ユーザー設定" page="html/userConfig.html"></ons-tab>
+        <ons-tab label="共有設定" page="html/groupConfig.html"></ons-tab>
+        <ons-tab label="その他設定" page="html/etcConfig.html"></ons-tab>
+        -->
+        <ons-tab label="Debug" page="html/debug.html"></ons-tab>
+    </ons-tabbar>
+</body>
+</html>

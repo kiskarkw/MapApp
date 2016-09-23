@@ -1,0 +1,18 @@
+{
+    "log" : {
+        "s0001" : "localstrage save success",
+        "s0002" : "localstrage read success",
+        "s9001" : "localstrage save error",
+        "s9002" : "localstrage read error",
+        "s9003" : "error on GPS gathering"
+    },
+    "button" : {
+        "switchGps" : [
+            "GPS無効",
+            "GPS有効",
+            "GPS強制有効"
+        ],
+        "immediateUpdateGps" : "現在地を今すぐ更新"
+    },
+    "EOF" : "1"
+}
